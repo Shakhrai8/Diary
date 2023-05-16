@@ -1,0 +1,1 @@
+# Contact class doesn't have any behavior or methods that can be directly tested. Or at least I have no idea how to write an isolated test for it :-0
