@@ -11,6 +11,10 @@ RSpec.describe "Diary Integration" do
   let(:entry_2) { DiaryEntry.new("2023-05-02", "Feeling tired, need some rest.") }
   let(:entry_3) { DiaryEntry.new("2023-05-03", "Started a new project.", [Contact.new("John Doe", "1234567890")]) }
   let(:entry_4) { DiaryEntry.new("2023-05-04", "Met Jane Smith.", [Contact.new("Jane Smith", "9876543210")]) }
+  let(:todo_1) { Todo.new("Buy groceries") }
+  let(:todo_2) { Todo.new("Clean the house") }
+  let(:todo_3) { Todo.new("Pay bills") }
+  let(:todo_list) { TodoList.new }
 
   context "#list method" do
     it "returns list of entries" do
@@ -61,4 +65,36 @@ RSpec.describe "Diary Integration" do
       expect(diary.find_phone_numbers).to eq []
     end
   end
-end
+
+  context "TodoList integration" do
+    it "adds and views tasks" do
+      todo_list.add_task(todo_1)
+      todo_list.add_task(todo_2)
+      expect(todo_list.view_tasks).to eq ["Buy groceries", "Clean the house"]
+    end
+
+    it "returns the list of incomplete tasks" do
+      todo_list.add_task(todo_1)
+      todo_list.add_task(todo_2)
+      todo_list.add_task(todo_3)
+      todo_2.mark_done!
+      expect(todo_list.incomplete).to eq ["Buy groceries", "Pay bills"]
+    end
+    it "returns the list of complete tasks" do
+      todo_list.add_task(todo_1)
+      todo_list.add_task(todo_2)
+      todo_list.add_task(todo_3)
+      todo_2.mark_done!
+      expect(todo_list.complete).to eq ["Clean the house"]
+    end
+    
+    it "marks all tasks as done" do
+      todo_list.add_task(todo_1)
+      todo_list.add_task(todo_2)
+      todo_list.add_task(todo_3)
+      todo_list.complete_all
+      expect(todo_list.incomplete).to eq 0
+      expect(todo_list.complete).to eq ["Buy groceries", "Clean the house", "Pay bills"]
+    end
+  end
+end    

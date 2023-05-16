@@ -10,11 +10,9 @@ class TodoList
   end
 
   def view_tasks
-    tasks.each_with_index do |task, index|
-      puts "#{index + 1}. #{task.task}"
-    end
+    tasks.map(&:task)
   end
-  
+
   def incomplete
     incomplete_tasks = tasks.map do |todo|
       todo.done? ? nil : todo.task
