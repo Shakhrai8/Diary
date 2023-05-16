@@ -1,14 +1,15 @@
 class ContactList
+  attr_accessor :contacts
 
   def initialize
-    #...
+    @contacts = []
   end
 
-  def add_contact(contact) 
-    # adds new contact
+  def add_contact(contact)
+    contacts << contact
   end
 
   def view_numbers
-    # returns all phone numbers
-  end  
+    contacts.map(&:phone_number)
+  end
 end

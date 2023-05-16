@@ -126,6 +126,43 @@ class TodoList
   def view_tasks
     # return list of tasks
   end
+
+  def incomplete
+    # returns list of incomplete tasks
+    # returns 0 if there are no incomplete tasks
+  end
+
+  def complete
+    # returns list of complete tasks
+    # returns 0 if there are no complete tasks
+  end
+
+  def complete_all
+    # marks all tasks as complete
+  end
+end
+
+class Todo
+  def initialize(task)
+    #....
+  end
+
+  def initialize(task) # task is a string
+    @task = task
+    @done = false
+  end
+
+  def task
+    # returns task
+  end
+
+  def mark_done!
+    # marks task as complete
+  end
+
+  def done?
+    # returns true if the mark is complete, otherwise false
+  end
 end
 
 class Contact

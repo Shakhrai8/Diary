@@ -35,6 +35,12 @@ class Diary
   end
 
   def find_phone_numbers
-    #returns all contact numbers
+    phone_numbers = []
+    entries.each do |entry|
+      entry.contacts.each do |contact|
+        phone_numbers << contact.phone_number
+      end
+    end
+    phone_numbers
   end
 end
