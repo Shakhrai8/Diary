@@ -44,10 +44,10 @@ uses asciiflow.com but you could also use excalidraw.com, draw.io, or miro.com_
 
 ┌───────────────────────────┐         ┌───────────────────────────┐
 │Diary                      │         │DiaryEntry                 │
-│                           │         │                           │
+│   -count_words            │         │                           │
 │   - add(diary_entry)      │   add   │     - initializer         │
-│   - list                  ├─────────►                           │
-│   - select_entries        │         │                           │
+│   - list                  ├─────────►     - count_words         │
+│   - select_entries        │         │     - reading_time        │
 │    (wpm, min)             │         │                           │
 │   - find_contact          │         │                           │
 └───────────┬───────────────┘         └───────────────────────────┘
@@ -75,6 +75,14 @@ class DiaryEntry
   def initialize(date, content, contacts = [])
     #....
   end
+
+  def count_words
+    #returns number of words in a given string
+  end
+
+  def reading_time(wpm)
+    #returns an integer representing the time in minutes needed for reading an entry
+  end
 end
 
 class Diary
@@ -90,6 +98,10 @@ class Diary
 
   def list
     # returns all entries
+  end
+
+  def count_words
+    #returns number of words in array
   end
 
   def select_entries(wpm, minutes)
@@ -112,9 +124,7 @@ class TodoList
   end
 
   def view_tasks
-    tasks.each_with_index do |task, index|
-      puts "#{index + 1}. #{task}"
-    end
+    # return list of tasks
   end
 end
 
