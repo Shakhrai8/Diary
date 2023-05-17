@@ -3,6 +3,7 @@ class Diary
 
   def initialize
     @entries = []
+    @task_list = TodoList.new
   end
 
   def add(entry) 

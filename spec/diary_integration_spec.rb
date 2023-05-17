@@ -97,4 +97,32 @@ RSpec.describe "Diary Integration" do
       expect(todo_list.complete).to eq ["Buy groceries", "Clean the house", "Pay bills"]
     end
   end
+
+  context "instance variable test in #todo_list" do
+
+    it "returns an empty task list" do
+      expect(diary.instance_variable_get(:@task_list).view_tasks).to eq []
+    end
+
+    it "returns a list of tasks" do
+      diary.instance_variable_get(:@task_list).add_task(todo_1)
+      expect(diary.instance_variable_get(:@task_list).view_tasks).to eq [todo_1.instance_variable_get(:@task)]
+    end
+
+    it "returns a list of complete tasks" do
+      diary.instance_variable_get(:@task_list).add_task(todo_1)
+      diary.instance_variable_get(:@task_list).add_task(todo_2)
+      todo_2.mark_done!
+      todo_1.mark_done!
+      expect(diary.instance_variable_get(:@task_list).complete).to eq [todo_1.instance_variable_get(:@task), todo_2.instance_variable_get(:@task)]
+      expect(diary.instance_variable_get(:@task_list).incomplete).to eq 0
+    end
+
+    it "returns a list of imcomplete tasks" do
+      diary.instance_variable_get(:@task_list).add_task(todo_1)
+      diary.instance_variable_get(:@task_list).add_task(todo_2)
+      expect(diary.instance_variable_get(:@task_list).incomplete).to eq [todo_1.instance_variable_get(:@task), todo_2.instance_variable_get(:@task)]
+      expect(diary.instance_variable_get(:@task_list).complete).to eq 0
+    end
+  end
 end    
