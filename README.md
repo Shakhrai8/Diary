@@ -11,12 +11,14 @@ Project Diary allows:
 
 ## Getting started
 
-`git clone path-to-your-repo`
-`command_to_install_dependencies` (e.g. `bundle`)
+`git clone [path-to-your-repo](https://github.com/Shakhrai8/Diary.git)`
+
 
 ## Usage
 
+```shell
 diary.rb
+```
 
 
 ## Running tests
